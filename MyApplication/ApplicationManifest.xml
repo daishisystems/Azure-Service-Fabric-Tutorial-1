@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="MyApplicationType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <Parameters>
+      <Parameter Name="SimpleActorService_PartitionCount" DefaultValue="10" />
+      <Parameter Name="SimpleActorService_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="SimpleActorService_TargetReplicaSetSize" DefaultValue="3" />
+   </Parameters>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="SimpleActorPkg" ServiceManifestVersion="1.0.0" />
+   </ServiceManifestImport>
+   <DefaultServices>
+      <Service Name="SimpleActorService" GeneratedIdRef="f8f10bbc-9c72-4664-926b-0190a4447146">
+         <StatefulService ServiceTypeName="SimpleActorServiceType" TargetReplicaSetSize="[SimpleActorService_TargetReplicaSetSize]" MinReplicaSetSize="[SimpleActorService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[SimpleActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
+      </Service>
+   </DefaultServices>
+</ApplicationManifest>
